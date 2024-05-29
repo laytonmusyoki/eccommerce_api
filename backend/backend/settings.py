@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-eiy4oqsq=%48u+%^kdn+1vzo&$g80-ayyf^x^$y+6!y_j70y=7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['eccommerce-api-0y9j.onrender.com']
 
 
 # Application definition
@@ -47,7 +47,7 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    "https://07c9-41-90-70-18.ngrok-free.app",
+    "eccommerce-api-0y9j.onrender.com",
 ]
 
 
