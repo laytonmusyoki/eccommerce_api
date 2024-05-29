@@ -42,16 +42,12 @@ INSTALLED_APPS = [
     "api"
 ]
 
+
+
+
+
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
-]
-
-CORS_ALLOWED_ORIGINS = [
-    "https://07c9-41-90-70-18.ngrok-free.app",
-]
-
-
-MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -60,6 +56,12 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
+CORS_ALLOWED_ORIGINS = [
+    "eccommerce-api-d3j1.onrender.com",
+]
+
+
 
 ROOT_URLCONF = "backend.urls"
 
