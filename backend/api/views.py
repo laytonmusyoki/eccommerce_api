@@ -63,10 +63,9 @@ def add_product(request):
 
 
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
 def products(request):
     products=Product.objects.all()
     serializer=ProductSerializer(products,many=True)
-    return Response({"products":serializer})
+    return Response({"products":serializer.data})
 
 
