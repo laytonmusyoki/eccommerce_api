@@ -27,7 +27,7 @@ def login_user(request):
     
     if not serializer.is_valid():
         return Response({
-            "status": False,
+            "status": 400,
             "message": serializer.errors
         }, status=status.HTTP_400_BAD_REQUEST)
     
