@@ -37,7 +37,7 @@ def login_user(request):
     if not user:
         return Response({
             "status": 400,
-            "message": 'Invalid credentials'
+            "error": 'Invalid credentials'
         }, status=status.HTTP_400_BAD_REQUEST)
     
     refresh = RefreshToken.for_user(user)
