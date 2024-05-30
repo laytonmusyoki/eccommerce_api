@@ -13,9 +13,9 @@ def Register_user(request):
     serializer=Register(data=data)
     if serializer.is_valid():
         serializer.save()
-        return Response({"status":200,"success":f"Account created for {serializer.data['username']}"})
+        return Response({"status":201,"success":f"Account created for {serializer.data['username']}"})
     else:
-        return Response({"status":"400",
+        return Response({"status":400,
             "message":serializer.errors
             },status.HTTP_400_BAD_REQUEST)
     
