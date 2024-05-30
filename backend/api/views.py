@@ -5,6 +5,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import authenticate
 from .serializer import LoginSerializer,Register,ProductSerializer
 from rest_framework.permissions import IsAuthenticated
+from .models import Product
 
 
 @api_view(['POST'])
@@ -64,6 +65,8 @@ def add_product(request):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def products(request):
-    return Response({"Message":"products worked"})
+    products=Product.objects.all()
+    serializer=ProductSerializer(products,many=True)
+    return Response({"products":serializer})
 
 
