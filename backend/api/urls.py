@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path
 
-from .views import login_user,products,Register_user,add_product
+from .views import *
 
 
 from rest_framework_simplejwt.views import (
@@ -12,6 +12,7 @@ from rest_framework_simplejwt.views import (
 
 urlpatterns = [
     path('signin/',login_user,name="login_user"),
+    path('cart/',cart,name='cart'),
     path('register/',Register_user,name="Register"),
     path('products/',products,name="products"),
     path('add_product/',add_product,name="add_product"),

@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from .models import Product
+from .models import *
 
 
 from rest_framework import serializers
@@ -40,3 +40,18 @@ class ProductSerializer(serializers.ModelSerializer):
         fields='__all__'
 
 
+
+class OrderSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=Order
+        fields='__all__'
+
+
+
+class ItemSerializer(serializers.ModelSerializer):
+    items = OrderSerializer(many=True, read_only=True, source='orderitem_set')
+    cartItems = serializers.IntegerField(source='get_cart_items', read_only=True)
+
+    class Meta:
+        model=OrderItem
+        fields='__all__'

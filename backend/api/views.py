@@ -3,9 +3,9 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import authenticate
-from .serializer import LoginSerializer,Register,ProductSerializer
+from .serializer import *
 from rest_framework.permissions import IsAuthenticated
-from .models import Product
+from .models import Product,Customer,Order,OrderItem
 
 
 @api_view(['POST'])
@@ -14,6 +14,11 @@ def Register_user(request):
     serializer=Register(data=data)
     if serializer.is_valid():
         serializer.save()
+        Customer.objects.create(
+                user=serializer,
+                name=serializer.data['username'],
+                email=serializer.data['email'],
+            )
         return Response({"status":201,"success":f"Account created for {serializer.data['username']}"})
     else:
         return Response({"status":400,
@@ -50,7 +55,7 @@ def login_user(request):
             'refresh': refresh_token
         }, status=status.HTTP_200_OK)
     
-    
+
 
 @api_view(['POST'])
 def add_product(request):
@@ -69,4 +74,66 @@ def products(request):
     serializer=ProductSerializer(products,many=True)
     return Response({"products":serializer.data})
 
+
+
+
+
+@permission_classes([IsAuthenticated])
+@api_view(['POST'])
+def cart(request):
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        serializer=OrderSerializer(order)
+        serialized_order = serializer.data
+        items = order.orderitem_set.all()
+        serialized_items=ItemSerializer(items,many=True).data
+        new_serialized_items=[]
+        for item in serialized_items:
+            product=Product.objects.get(id=item['product'])
+            item['categories']=ProductSerializer(product).data['categories']
+            item['name']=ProductSerializer(product).data['name']
+            item['image']=ProductSerializer(product).data['image']
+            item['price']=ProductSerializer(product).data['price']
+            new_serialized_items.append(item)
+        cartItems = order.get_cart_items
+        cartTotal=order.get_cart_total
+    else:
+        items = []
+        order = {'get_cart_total':0, 'get_cart_items':0, 'shipping':False}
+        cartItems = order['get_cart_items']
+
+    #"order":serialized_order,
+    context = {"items":cartItems,"cartTotal":cartTotal,"cartProducts":serialized_items}
+    return Response(context)
+
+
+
+
+def updateItem(request):
+    data = request.data
+    productId = data['productId']
+    action = data['action']
+
+    print('Action:', action)
+    print('Product:', productId)
+
+    customer = request.user.customer
+    product = Product.objects.get(id=productId)
+    order, created = Order.objects.get_or_create(customer=customer, complete=False)
+
+    orderItem, created = OrderItem.objects.get_or_create(order=order, product=product)
+
+    if action == 'add':
+        orderItem.quantity = (orderItem.quantity + 1)
+    elif action == 'remove':
+        orderItem.quantity = (orderItem.quantity - 1)
+
+    orderItem.save()
+
+    if orderItem.quantity <= 0:
+        orderItem.delete()
+        
+
+    return Response({"message":"Item was added successfuly"}, safe=False)
 
