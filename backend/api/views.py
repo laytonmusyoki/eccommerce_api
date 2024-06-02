@@ -88,6 +88,8 @@ def cart(request):
         serialized_order = serializer.data
         items = order.orderitem_set.all()
         serialized_items=ItemSerializer(items,many=True).data
+        cartItems = order.get_cart_items
+        cartTotal=order.get_cart_total
         new_serialized_items=[]
         for item in serialized_items:
             product=Product.objects.get(id=item['product'])
@@ -95,16 +97,16 @@ def cart(request):
             item['name']=ProductSerializer(product).data['name']
             item['image']=ProductSerializer(product).data['image']
             item['price']=ProductSerializer(product).data['price']
+            item['cartTotal']=cartTotal
+            item['items']=cartItems
             new_serialized_items.append(item)
-        cartItems = order.get_cart_items
-        cartTotal=order.get_cart_total
     else:
         items = []
         order = {'get_cart_total':0, 'get_cart_items':0, 'shipping':False}
         cartItems = order['get_cart_items']
 
     #"order":serialized_order,
-    context = {"items":cartItems,"cartTotal":cartTotal,"cartProducts":serialized_items}
+    context = {"status":200,"cartProducts":serialized_items}
     return Response(context)
 
 
