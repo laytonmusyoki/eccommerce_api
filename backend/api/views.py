@@ -112,6 +112,8 @@ def cart(request):
 
 
 
+@permission_classes([IsAuthenticated])
+@api_view(['POST'])
 def updateItem(request):
     data = request.data
     productId = data['productId']
@@ -137,5 +139,5 @@ def updateItem(request):
         orderItem.delete()
         
 
-    return Response({"message":"Item was added successfuly"}, safe=False)
+    return Response({"success":200,"message":"Item was added successfuly"})
 

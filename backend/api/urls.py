@@ -13,6 +13,7 @@ from rest_framework_simplejwt.views import (
 urlpatterns = [
     path('signin/',login_user,name="login_user"),
     path('cart/',cart,name='cart'),
+    path('updateItem/',updateItem,name='updateItem'),
     path('register/',Register_user,name="Register"),
     path('products/',products,name="products"),
     path('add_product/',add_product,name="add_product"),
