@@ -14,11 +14,6 @@ def Register_user(request):
     serializer=Register(data=data)
     if serializer.is_valid():
         serializer.save()
-        Customer.objects.create(
-                user=serializer,
-                name=serializer.data['username'],
-                email=serializer.data['email'],
-            )
         return Response({"status":201,"success":f"Account created for {serializer.data['username']}"})
     else:
         return Response({"status":400,

@@ -30,8 +30,13 @@ class Register(serializers.Serializer):
         user=User.objects.create(username=validated_data['username'],email=validated_data['email'])
         user.set_password(validated_data['password'])
         user.save()
+
+        Customer.objects.create(user=user,name=user.username,email=user.email)
         
         return validated_data
+
+
+
         
 
 class ProductSerializer(serializers.ModelSerializer):
