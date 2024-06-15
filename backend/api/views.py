@@ -101,7 +101,7 @@ def cart(request):
         cartItems = order['get_cart_items']
 
     #"order":serialized_order,
-    context = {"status":200,"cartProducts":serialized_items}
+    context = {"status":200,"cartProducts":new_serialized_items}
     return Response(context)
 
 
@@ -136,3 +136,7 @@ def updateItem(request):
 
     return Response({"success":200,"message":"Item was added successfuly"})
 
+
+
+def profile(request):
+    return ""
