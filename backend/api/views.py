@@ -137,6 +137,3 @@ def updateItem(request):
     return Response({"success":200,"message":"Item was added successfuly"})
 
 
-
-def profile(request):
-    return ""
