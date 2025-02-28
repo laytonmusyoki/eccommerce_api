@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-eiy4oqsq=%48u+%^kdn+1vzo&$g80-ayyf^x^$y+6!y_j70y=7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['shop-qttp.onrender.com','localhost','127.0.0.1']
+ALLOWED_HOSTS = ['shop-qttp.onrender.com']
 
 
 # Application definition
@@ -92,17 +92,10 @@ WSGI_APPLICATION = "backend.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.mysql",
-        "NAME": "if0_38416126_laytonstore",
-        "USER": "if0_38416126",
-        "PASSWORD": "zVHcqTWEDwA2PQ",
-        "HOST": "sql207.infinityfree.com",
-        "PORT": "3306",
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
     }
 }
-
-import pymysql
-pymysql.install_as_MySQLdb()
 
 
 # Password validation
