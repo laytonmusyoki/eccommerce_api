@@ -97,6 +97,7 @@ DATABASES = {
         "USER": "if0_38416126",
         "PASSWORD": "zVHcqTWEDwA2PQ",
         "HOST": "sql207.infinityfree.com"
+        "PORT": "3306",
     }
 }
 
