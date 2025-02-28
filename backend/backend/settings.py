@@ -92,8 +92,12 @@ WSGI_APPLICATION = "backend.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "laytonstore",
+        "USER": "laytonstore",
+        "PASSWORD": "Ib321ziKKBPjPXwTqez0PuPpXcaHHTOZ",
+        "HOST": "dpg-cv0r2l8gph6c738r9vjg-a.render.com", 
+        "PORT": "5432",
     }
 }
 
