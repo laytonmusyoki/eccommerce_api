@@ -93,11 +93,10 @@ WSGI_APPLICATION = "backend.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": "urrpuaso_eccormerce_api",
-        "USER": "urrpuaso_chapaHustle",
-        "PASSWORD": "chapaHustle123",
-        "HOST": "127.0.0.1",
-        "PORT": "3306",
+        "NAME": "if0_38416126_laytonstore",
+        "USER": "if0_38416126",
+        "PASSWORD": "zVHcqTWEDwA2PQ",
+        "HOST": "sql207.infinityfree.com"
     }
 }
 
