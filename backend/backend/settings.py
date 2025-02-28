@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-eiy4oqsq=%48u+%^kdn+1vzo&$g80-ayyf^x^$y+6!y_j70y=7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['shop-qttp.onrender.com']
+ALLOWED_HOSTS = ['shop-qttp.onrender.com','localhost','127.0.0.1']
 
 
 # Application definition
@@ -92,8 +92,12 @@ WSGI_APPLICATION = "backend.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": "urrpuaso_eccormerce_api",
+        "USER": "urrpuaso_chapaHustle",
+        "PASSWORD": "chapaHustle123",
+        "HOST": "127.0.0.1",
+        "PORT": "3306",
     }
 }
 
